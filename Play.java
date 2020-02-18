@@ -1,30 +1,21 @@
 import java.util.*;
 
-class playerone {
+class player {
 	Scanner sc = new Scanner(System.in);
 	String player_one_name;
-	int player_one = 0;
+	String player_two_name;
+	int player_one = 0,player_two = 0;;
 
-	void nameone() {
+	void name() {
 		System.out.println("Please, Enter the name of player One : ");
 		player_one_name = sc.next();
+		System.out.println("Please, Enter the name of player Two : ");
+		player_two_name = sc.next();
 	}
 
 	void scoreone() {
 		player_one++;
 	}
-}
-
-class playertwo {
-	Scanner sc = new Scanner(System.in);
-	String player_two_name;
-	int player_two = 0;
-
-	void nametwo() {
-		System.out.println("Please, Enter the name of player Two : ");
-		player_two_name = sc.next();
-	}
-
 	void scoretwo() {
 		player_two++;
 	}
@@ -34,6 +25,7 @@ public class Play {
 	static int box[][] = new int[8][8];
 	int x=1,y=0,u=6,v=7,draw=0,game_over=0;
 	Scanner sc = new Scanner(System.in);
+	static player po=new player();
 	private int check()
 	{
 		int k=0;
@@ -51,7 +43,6 @@ public class Play {
 	}
 
 	private void moveone() {
-		playerone po=new playerone();
 		int c=check();
 		int d=checkdraw();
 		if(c==1)
@@ -79,13 +70,12 @@ public class Play {
 	}
 	private void movetwo() {
 
-		playertwo pt=new playertwo();
 		int c=check();
 		int d=checkdraw();
 		if(c==1)
 		{
-			pt.player_two+=3;
-			System.out.println(pt.player_two_name+" 2 Won the game.\n Total Points : "+pt.player_two);
+			po.player_two+=3;
+			System.out.println(po.player_two_name+" 2 Won the game.\n Total Points : "+po.player_two);
 			game_over=1;
 		}
 		else if(d==1)
@@ -93,7 +83,7 @@ public class Play {
 		else
 		{
 			box[u][v]=0;
-			System.out.println(pt.player_two_name+", 2 Please press 1 to move left or 2 to move Right : ");
+			System.out.println(po.player_two_name+", 2 Please press 1 to move left or 2 to move Right : ");
 			int m=sc.nextInt();
 			if(m==1)
 				v--;
@@ -109,8 +99,7 @@ public class Play {
 	public static void main(String[] args)
 	{
 		int first_move,total_move=-1,i,j; 
-		playerone po=new playerone();
-		playertwo pt=new playertwo();
+		
 		Play p=new Play();
 		
 		for(i=0;i<8;i++)
@@ -118,13 +107,12 @@ public class Play {
 				box[i][j]=0;
 		//taking names of the player
 		
-		po.nameone();
-		pt.nametwo();
+		po.name();
 		
 		//displaying the name
 		
 		System.out.println("Player one name is : "+po.player_one_name);
-		System.out.println("\nPlayer two name is : "+pt.player_two_name);
+		System.out.println("\nPlayer two name is : "+po.player_two_name);
 		
 		//getting the first chance for the player
 		
@@ -137,12 +125,12 @@ public class Play {
 		if(first_move==0)
 			System.out.println("First move will be made by '"+po.player_one_name+"'");
 		else
-			System.out.println("First move will be made by '"+pt.player_two_name+"'");
+			System.out.println("First move will be made by '"+po.player_two_name+"'");
 		
 		//defining the position of the players
 		
 		System.out.println(po.player_one_name+"'s position is : "+p.x+""+p.y);
-		System.out.println(pt.player_two_name+"'s position is : "+p.u+""+p.v);
+		System.out.println(po.player_two_name+"'s position is : "+p.u+""+p.v);
 		
 		
 		//Moving the positions
